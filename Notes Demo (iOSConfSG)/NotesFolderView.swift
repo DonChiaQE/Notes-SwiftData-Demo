@@ -19,9 +19,7 @@ struct NotesFolderView: View {
             ForEach(folder.notes.sorted(by: { notes, note in
                 note.lastModified < notes.lastModified
             })) { note in
-                NavigationLink {
-                    EditNoteView(note: note)
-                } label: {
+                NavigationLink(destination: EditNoteView(note: note), label: {
                     VStack(alignment: .leading) {
                         Text(note.content.isEmpty ? "New Note" : note.content)
                             .font(.headline)
@@ -34,7 +32,8 @@ struct NotesFolderView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     }
-                }.swipeActions {
+                })
+                .swipeActions {
                     Button(role: .destructive) {
                         modelContext.delete(note)
                     } label: {

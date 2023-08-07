@@ -56,7 +56,9 @@ struct ContentView: View {
                 ContentUnavailableView("No folders created", systemImage: "folder")
             } else {
                 folders.first.map { folder in
-                    NotesFolderView(folder: folder)
+                    NavigationStack {
+                        NotesFolderView(folder: folder)
+                    }
                 }
             
             }
