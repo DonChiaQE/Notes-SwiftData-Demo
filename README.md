@@ -9,4 +9,5 @@
 ## Compatible Device
 - iOS
 - iPadOS
-- Vision Pro
+- MacOS (Designed for iPad)
+- Vision Pro (Designed for iPad)
