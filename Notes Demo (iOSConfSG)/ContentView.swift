@@ -9,47 +9,55 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    
+    @State private var presentCreateFolderSheet: Bool = false
+    
+    @Query private var folders: [Folder]
+    
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+                ForEach(folders.sorted(by: { folders, folder in
+                    folder.dateCreated > folder.dateCreated
+                })) { folder in
+                    NavigationLink(destination: NotesFolderView(folder: folder), label: {
+                        HStack {
+                            Image(systemName: "folder")
+                            Text(folder.folderName)
+                            Spacer()
+                            Text(folder.notes.count.description)
+                                .foregroundStyle(Color.secondary)
+                        }
+                    })
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteFolder)
             }
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing, content: {
+                    Button(action: {
+                        presentCreateFolderSheet.toggle()
+                    }, label: {
+                        Label("New Folder", systemImage: "folder.badge.plus")
+                    })
+                })
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
             }
-        } detail: {
-            Text("Select an item")
+            .sheet(isPresented: $presentCreateFolderSheet, content: {
+                CreateFolderView(presentSheet: $presentCreateFolderSheet)
+            })
+            .navigationTitle(Text("Folders"))
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
+    
+    private func deleteFolder(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(folders[index])
             }
         }
     }
@@ -57,5 +65,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Folder.self, inMemory: true)
 }

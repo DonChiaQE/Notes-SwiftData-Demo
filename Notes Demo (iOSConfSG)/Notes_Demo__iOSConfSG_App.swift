@@ -10,11 +10,10 @@ import SwiftData
 
 @main
 struct Notes_Demo__iOSConfSG_App: App {
-
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Item.self)
+        .modelContainer(for: [Folder.self, Note.self])
     }
 }

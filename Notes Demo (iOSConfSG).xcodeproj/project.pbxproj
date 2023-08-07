@@ -9,18 +9,26 @@
 /* Begin PBXBuildFile section */
 		971349042A7BE0C1005CC3FB /* Notes_Demo__iOSConfSG_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971349032A7BE0C1005CC3FB /* Notes_Demo__iOSConfSG_App.swift */; };
 		971349062A7BE0C1005CC3FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971349052A7BE0C1005CC3FB /* ContentView.swift */; };
-		971349082A7BE0C1005CC3FB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971349072A7BE0C1005CC3FB /* Item.swift */; };
 		9713490A2A7BE0C4005CC3FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 971349092A7BE0C4005CC3FB /* Assets.xcassets */; };
 		9713490D2A7BE0C4005CC3FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9713490C2A7BE0C4005CC3FB /* Preview Assets.xcassets */; };
+		971349152A7BF71A005CC3FB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971349142A7BF71A005CC3FB /* Note.swift */; };
+		971349192A7BFBFB005CC3FB /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971349182A7BFBFB005CC3FB /* EditNoteView.swift */; };
+		97E0F3082A80BD6E008D14C1 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E0F3072A80BD6E008D14C1 /* Folder.swift */; };
+		97E0F30A2A80BE54008D14C1 /* NotesFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E0F3092A80BE54008D14C1 /* NotesFolderView.swift */; };
+		97E0F30C2A80C395008D14C1 /* CreateFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E0F30B2A80C395008D14C1 /* CreateFolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		971349002A7BE0C1005CC3FB /* Notes Demo (iOSConfSG).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes Demo (iOSConfSG).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		971349032A7BE0C1005CC3FB /* Notes_Demo__iOSConfSG_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes_Demo__iOSConfSG_App.swift; sourceTree = "<group>"; };
 		971349052A7BE0C1005CC3FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		971349072A7BE0C1005CC3FB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		971349092A7BE0C4005CC3FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9713490C2A7BE0C4005CC3FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		971349142A7BF71A005CC3FB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		971349182A7BFBFB005CC3FB /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
+		97E0F3072A80BD6E008D14C1 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		97E0F3092A80BE54008D14C1 /* NotesFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesFolderView.swift; sourceTree = "<group>"; };
+		97E0F30B2A80C395008D14C1 /* CreateFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +61,14 @@
 		971349022A7BE0C1005CC3FB /* Notes Demo (iOSConfSG) */ = {
 			isa = PBXGroup;
 			children = (
+				971349132A7BF707005CC3FB /* Models */,
 				971349032A7BE0C1005CC3FB /* Notes_Demo__iOSConfSG_App.swift */,
 				971349052A7BE0C1005CC3FB /* ContentView.swift */,
-				971349072A7BE0C1005CC3FB /* Item.swift */,
 				971349092A7BE0C4005CC3FB /* Assets.xcassets */,
 				9713490B2A7BE0C4005CC3FB /* Preview Content */,
+				971349182A7BFBFB005CC3FB /* EditNoteView.swift */,
+				97E0F3092A80BE54008D14C1 /* NotesFolderView.swift */,
+				97E0F30B2A80C395008D14C1 /* CreateFolderView.swift */,
 			);
 			path = "Notes Demo (iOSConfSG)";
 			sourceTree = "<group>";
@@ -68,6 +79,15 @@
 				9713490C2A7BE0C4005CC3FB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		971349132A7BF707005CC3FB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				971349142A7BF71A005CC3FB /* Note.swift */,
+				97E0F3072A80BD6E008D14C1 /* Folder.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,9 +160,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97E0F30A2A80BE54008D14C1 /* NotesFolderView.swift in Sources */,
+				97E0F30C2A80C395008D14C1 /* CreateFolderView.swift in Sources */,
+				971349192A7BFBFB005CC3FB /* EditNoteView.swift in Sources */,
+				97E0F3082A80BD6E008D14C1 /* Folder.swift in Sources */,
 				971349062A7BE0C1005CC3FB /* ContentView.swift in Sources */,
-				971349082A7BE0C1005CC3FB /* Item.swift in Sources */,
 				971349042A7BE0C1005CC3FB /* Notes_Demo__iOSConfSG_App.swift in Sources */,
+				971349152A7BF71A005CC3FB /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
