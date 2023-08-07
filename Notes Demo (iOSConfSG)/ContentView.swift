@@ -17,7 +17,7 @@ struct ContentView: View {
     @Query private var folders: [Folder]
     
     var body: some View {
-        NavigationStack {
+        NavigationSplitView {
             List {
                 ForEach(folders.sorted(by: { folders, folder in
                     folder.dateCreated > folder.dateCreated
@@ -51,6 +51,15 @@ struct ContentView: View {
                 CreateFolderView(presentSheet: $presentCreateFolderSheet)
             })
             .navigationTitle(Text("Folders"))
+        } detail: {
+            if folders.isEmpty {
+                ContentUnavailableView("No folders created", systemImage: "folder")
+            } else {
+                folders.first.map { folder in
+                    NotesFolderView(folder: folder)
+                }
+            
+            }
         }
     }
     
