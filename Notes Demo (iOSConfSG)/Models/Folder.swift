@@ -10,19 +10,14 @@ import SwiftData
 
 @Model
 final class Folder {
-    var uuid: UUID
-    var dateCreated: Date
-    @Attribute(.unique) var folderName: String
-    @Relationship(.cascade, inverse: \Note.folder) var notes: [Note] = []
-    
-//    var notes: [Note] {
-//        get { self.notes_ ?? [] }
-//        set { self.notes_ = newValue  }
-//    }
+    var uuid: UUID = UUID()
+    var dateCreated: Date = Date()
+    @Attribute(.unique)
+    var folderName: String
+    @Relationship(.cascade, inverse: \Note.folder)
+    var notes: [Note] = []
     
     init(folderName: String) {
-        self.uuid = UUID()
-        self.dateCreated = Date()
         self.folderName = folderName
     }
 }

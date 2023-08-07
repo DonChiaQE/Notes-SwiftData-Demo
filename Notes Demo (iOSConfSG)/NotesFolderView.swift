@@ -65,7 +65,7 @@ struct NotesFolderView: View {
     
     private func createNote() {
         withAnimation {
-            let newNote = Note(content: "", lastModified: Date(), folder: folder)
+            let newNote = Note(lastModified: Date(), folder: folder)
             folder.notes.append(newNote)
         }
     }

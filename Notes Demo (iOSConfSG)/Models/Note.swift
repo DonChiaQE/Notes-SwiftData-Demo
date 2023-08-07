@@ -11,12 +11,11 @@ import SwiftData
 @Model
 final class Note {
     var uuid: UUID = UUID()
-    var content: String
+    var content: String = ""
     var lastModified: Date
     var folder: Folder?
     
-    init(content: String, lastModified: Date, folder: Folder) {
-        self.content = content
+    init(lastModified: Date, folder: Folder) {
         self.lastModified = lastModified
         self.folder = folder
     }
