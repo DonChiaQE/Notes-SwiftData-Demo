@@ -41,7 +41,7 @@ struct FoldersView: View {
                     })
                 })
                 
-                ToolbarItem(placement: .navigationBarTrailing, content: {
+                ToolbarItem(placement: .topBarTrailing, content: {
                     EditButton()
                 })
             }
