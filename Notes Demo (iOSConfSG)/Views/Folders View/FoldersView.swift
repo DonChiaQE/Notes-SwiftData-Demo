@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FoldersView.swift
 //  Notes Demo (iOSConfSG)
 //
 //  Created by Don Chia on 3/8/23.
@@ -8,21 +8,19 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct FoldersView: View {
     
     @Environment(\.modelContext) private var modelContext
     
     @State private var presentCreateFolderSheet: Bool = false
     
-    @Query private var folders: [Folder]
+    @Query(sort: \Folder.lastModified, order: .reverse) private var folders: [Folder]
     
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(folders.sorted(by: { folders, folder in
-                    folder.dateCreated > folder.dateCreated
-                })) { folder in
-                    NavigationLink(destination: NotesFolderView(folder: folder), label: {
+                ForEach(folders) { folder in
+                    NavigationLink(destination: NotesView(folder: folder), label: {
                         HStack {
                             Image(systemName: "folder")
                             Text(folder.folderName)
@@ -43,9 +41,9 @@ struct ContentView: View {
                     })
                 })
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
                     EditButton()
-                }
+                })
             }
             .sheet(isPresented: $presentCreateFolderSheet, content: {
                 CreateFolderView(presentSheet: $presentCreateFolderSheet)
@@ -57,10 +55,9 @@ struct ContentView: View {
             } else {
                 folders.first.map { folder in
                     NavigationStack {
-                        NotesFolderView(folder: folder)
+                        NotesView(folder: folder)
                     }
                 }
-            
             }
         }
     }
@@ -75,6 +72,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    FoldersView()
         .modelContainer(for: Folder.self, inMemory: true)
 }

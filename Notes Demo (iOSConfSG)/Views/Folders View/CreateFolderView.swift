@@ -39,7 +39,7 @@ struct CreateFolderView: View {
     
     private func createFolder() {
         withAnimation {
-            let newFolder = Folder(folderName: folderName)
+            let newFolder = Folder(lastModified: Date(), folderName: folderName)
             modelContext.insert(newFolder)
             presentSheet.toggle()
         }

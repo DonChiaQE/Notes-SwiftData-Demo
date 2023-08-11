@@ -10,14 +10,20 @@ import SwiftData
 
 @Model
 final class Folder {
-    var uuid: UUID = UUID()
-    var dateCreated: Date = Date()
+    var uuid: UUID
+    var lastModified: Date
     @Attribute(.unique)
     var folderName: String
-    @Relationship(.cascade, inverse: \Note.folder)
-    var notes: [Note] = []
+    @Relationship(deleteRule: .cascade, inverse: \Note.folder) var notes: [Note]
     
-    init(folderName: String) {
+    init(lastModified: Date, folderName: String) {
+        self.uuid = UUID()
+        self.lastModified = lastModified
         self.folderName = folderName
+        self.notes = []
+    }
+    
+    func updateLastModified(lastModified: Date) {
+        self.lastModified = lastModified
     }
 }

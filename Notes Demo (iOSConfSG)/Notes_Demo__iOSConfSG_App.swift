@@ -12,7 +12,7 @@ import SwiftData
 struct Notes_Demo__iOSConfSG_App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FoldersView()
         }
         .modelContainer(for: [Folder.self, Note.self])
     }

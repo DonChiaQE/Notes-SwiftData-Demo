@@ -1,5 +1,5 @@
 //
-//  NotesFolderView.swift
+//  NotesView.swift
 //  Notes Demo (iOSConfSG)
 //
 //  Created by Don Chia on 7/8/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct NotesFolderView: View {
+struct NotesView: View {
     
     var folder: Folder
     
@@ -16,30 +16,26 @@ struct NotesFolderView: View {
     
     var body: some View {
         List {
-            ForEach(folder.notes.sorted(by: { notes, note in
-                note.lastModified < notes.lastModified
+            ForEach(folder.notes.sorted(by: { a, b in
+                b.lastModified < a.lastModified
             })) { note in
                 NavigationLink(destination: EditNoteView(note: note), label: {
-                    VStack(alignment: .leading) {
-                        Text(note.content.isEmpty ? "New Note" : note.content)
-                            .font(.headline)
-                            .lineLimit(1)
-                        Text(note.lastModified, format: Date.FormatStyle()
-                            .day(.twoDigits)
-                            .month(.twoDigits)
-                            .year(.twoDigits)
-                        )
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    }
+                    NoteRowView(note: note)
                 })
-                .swipeActions {
+                .swipeActions(allowsFullSwipe: false) {
                     Button(role: .destructive) {
                         modelContext.delete(note)
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
-
+                }
+                .swipeActions(edge: .leading) {
+                    Button {
+                        note.isFavorite.toggle()
+                    } label: {
+                        Label(note.isFavorite ? "Unfavorite" : "Favorite", systemImage: note.isFavorite ? "star.slash" : "star")
+                            .tint(Color.yellow)
+                    }
                 }
             }
         }
@@ -67,6 +63,7 @@ struct NotesFolderView: View {
         withAnimation {
             let newNote = Note(lastModified: Date(), folder: folder)
             folder.notes.append(newNote)
+            folder.updateLastModified(lastModified: Date())
         }
     }
 }

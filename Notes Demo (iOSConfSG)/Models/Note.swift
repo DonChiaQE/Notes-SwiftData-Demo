@@ -10,12 +10,16 @@ import SwiftData
 
 @Model
 final class Note {
-    var uuid: UUID = UUID()
-    var content: String = ""
+    var uuid: UUID
+    var content: String
+    var isFavorite: Bool
     var lastModified: Date
     var folder: Folder?
     
     init(lastModified: Date, folder: Folder) {
+        self.uuid = UUID()
+        self.content = ""
+        self.isFavorite = false
         self.lastModified = lastModified
         self.folder = folder
     }
